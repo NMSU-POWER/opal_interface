@@ -35,7 +35,7 @@ def recval():
     global inVal
     global fig
     animator = ani.FuncAnimation(fig, graph, interval=100)
-    plt.show()
+    # plt.show()
     while True:
         pair = mySocket.recvfrom(64)
         inVal = struct.unpack_from('d', pair[0], 0)[0]
