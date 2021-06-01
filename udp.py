@@ -43,9 +43,11 @@ def recval():
 
 
 if __name__ == '__main__':
-    recThread = threading.Thread(target=recval).start()
+    # recThread = threading.Thread(target=recval).start()
     remote_ip = sys.argv[1]
     while True:
+        pair = mySocket.recvfrom(64)
+        inVal = struct.unpack_from('d', pair[0], 0)[0]
         unchanged = True
         if inVal >= 250:
             if value == 1:
