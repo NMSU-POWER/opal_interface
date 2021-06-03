@@ -7,6 +7,7 @@
 
 import socket
 import struct
+import array
 import threading
 import sys
 import matplotlib.pyplot as plt
@@ -46,9 +47,10 @@ if __name__ == '__main__':
     # recThread = threading.Thread(target=recval).start()
     remote_ip = sys.argv[1]
     while True:
-        pair = mySocket.recvfrom(64)
-        inVal = struct.unpack_from('d', pair[0], 0)[0]
-        unchanged = True
+        pair = mySocket.recvfrom(1024)
+        inVal = array.array('d', pair)
+        print(inVal)
+        '''unchanged = True
         if inVal >= 250:
             if value == 1:
                 unchanged = False
@@ -58,4 +60,4 @@ if __name__ == '__main__':
                 unchanged = False
             value = 1
         if not unchanged:
-            mySend.sendto(struct.pack('i', value), (remote_ip, 25001))
+            mySend.sendto(struct.pack('i', value), (remote_ip, 25001))'''
