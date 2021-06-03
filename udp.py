@@ -51,7 +51,7 @@ if __name__ == '__main__':
         i+=1
         pair, addr = mySocket.recvfrom(1024)
         inVal = array.array('d', pair)
-        print(addr)
+        print(inVal)
         mySend.sendto(bytes(array.array('d', [0, 1, 2, i])), (remote_ip, 25001))
         '''unchanged = True
         if inVal >= 250:
