@@ -48,8 +48,9 @@ if __name__ == '__main__':
     remote_ip = sys.argv[1]
     while True:
         pair = mySocket.recvfrom(1024)
-        inVal = array.array('d', pair)
+        inVal, addr = array.array('d', pair)
         print(inVal)
+        mySend.sendto(bytes(array.array('d', [0, 1, 2, 3])))
         '''unchanged = True
         if inVal >= 250:
             if value == 1:
