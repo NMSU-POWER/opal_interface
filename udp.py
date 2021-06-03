@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as ani
 
 mySocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-mySocket.bind(('127.0.0.1', 25000))
+mySocket.bind(('128.123.131.66', 25000))
 # mySocket.bind(('169.254.8.179', 25000))
 mySend = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 
@@ -46,11 +46,13 @@ def recval():
 if __name__ == '__main__':
     # recThread = threading.Thread(target=recval).start()
     remote_ip = sys.argv[1]
+    i = 0
     while True:
-        pair = mySocket.recvfrom(1024)
-        inVal, addr = array.array('d', pair)
-        print(inVal)
-        mySend.sendto(bytes(array.array('d', [0, 1, 2, 3])))
+        i+=1
+        pair, addr = mySocket.recvfrom(1024)
+        inVal = array.array('d', pair)
+        print(addr)
+        mySend.sendto(bytes(array.array('d', [0, 1, 2, i])), (remote_ip, 25001))
         '''unchanged = True
         if inVal >= 250:
             if value == 1:
