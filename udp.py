@@ -51,9 +51,9 @@ if __name__ == '__main__':
         i+=1
         pair, addr = mySocket.recvfrom(1024)
         inVal = array.array('d', pair)
-        print(inVal)
-        mySend.sendto(bytes(array.array('d', [0, 1, 2, i])), (remote_ip, 25001))
-        '''unchanged = True
+        print(inVal[0])
+        # mySend.sendto(bytes(array.array('d', [0, 1, 2, i])), (remote_ip, 25001))
+        unchanged = True
         if inVal >= 250:
             if value == 1:
                 unchanged = False
@@ -63,4 +63,4 @@ if __name__ == '__main__':
                 unchanged = False
             value = 1
         if not unchanged:
-            mySend.sendto(struct.pack('i', value), (remote_ip, 25001))'''
+            mySend.sendto(bytes(array.array('d', [value])), (remote_ip, 25001))
