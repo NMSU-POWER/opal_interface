@@ -18,6 +18,7 @@ opal_tx = 25001
 
 # Need incoming datagram socket
 mySocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
+mySocket.bind((opal_ip, opal_rx))
 # Need outgoing malleable socket
 sendout = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 
@@ -28,6 +29,14 @@ for i in range(len(connections)):
     connections[i] = connections[i].split(',')
     connections[i][1] = int(connections[i][1])
     connections[i][2] = int(connections[i][2])
+
+# Gives us individual handles for controllers, need a new thread function to listen for data from each
+incoming_controller = []
+for connection in connections:
+    con_socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
+    con_socket.bind((connection[0], connection[1]))
+    incoming_controller.append(con_socket)
+
 
 # Set up for random delays
 random.seed()
