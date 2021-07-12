@@ -9,11 +9,10 @@ import socket
 
 
 class controller_connection:
-    def __init__(self, ip, port):
+    def __init__(self, in_socket):
         self.signal = 0
-        self.connection = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-        self.connection.bind((ip, port))
+        self.in_socket = in_socket
 
      def listener(self):
         while True:
-            self.signal = self.connection.recv(1024)[0]
+            self.signal = self.in_socket.recv(1024)[0]
